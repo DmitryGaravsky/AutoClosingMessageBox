@@ -9,15 +9,15 @@
             MessageBoxButtons buttons = MessageBoxButtons.OK, DialogResult defaultResult = DialogResult.None) {
             this.caption = caption;
             this.result = buttons.ToDialogResult(defaultResult);
-            using(new System.Threading.Timer(OnTimerElapsed, result, timeout, Timeout.Infinite))
+            using(new System.Threading.Timer(OnTimerElapsed, result.ToDialogButtonId(buttons), timeout, Timeout.Infinite))
                 this.result = MessageBox.Show(text, caption, buttons);
         }
         void OnTimerElapsed(object state) {
-            CloseMessageBoxWindow((DialogResult)state);
+            CloseMessageBoxWindow((int)state);
         }
-        void CloseMessageBoxWindow(DialogResult result) {
+        void CloseMessageBoxWindow(int dlgButtonId) {
             IntPtr hWndMsgBox = Utils.Win32Api.FindMessageBox(caption);
-            Utils.Win32Api.SendCommandToDlgButton(hWndMsgBox, result);
+            Utils.Win32Api.SendCommandToDlgButton(hWndMsgBox, dlgButtonId);
         }
         #region API
         public static DialogResult Show(string text,

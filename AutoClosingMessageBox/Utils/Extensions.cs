@@ -31,5 +31,10 @@
             }
             return defaultResult;
         }
+        public static int ToDialogButtonId(this DialogResult result, MessageBoxButtons buttons) {
+            if(buttons == MessageBoxButtons.OK)
+                return 2; // Exceptional case
+            return (int)result;
+        }
     }
 }

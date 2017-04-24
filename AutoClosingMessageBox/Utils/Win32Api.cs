@@ -10,17 +10,17 @@
             const string lpClassName_MessageBox = "#32770";
             return UnsafeNativeMethods.FindWindow(lpClassName_MessageBox, caption);
         }
-        public static void SendCommandToDlgButton(IntPtr hWnd, DialogResult dialogResult) {
+        public static void SendCommandToDlgButton(IntPtr hWnd, int dlgButtonId) {
             if(hWnd == IntPtr.Zero)
                 return;
             UnsafeNativeMethods.EnumChildWindows(hWnd, (handle, param) =>
             {
                 int ctrlId = UnsafeNativeMethods.GetDlgCtrlID(handle);
-                if(ctrlId == (int)dialogResult) {
+                if(ctrlId == dlgButtonId) {
                     const uint WM_COMMAND = 0x0111;
                     UnsafeNativeMethods.PostMessage(hWnd, WM_COMMAND, new IntPtr(ctrlId), handle);
                 }
-                return ctrlId != (int)dialogResult;
+                return ctrlId != dlgButtonId;
             }, IntPtr.Zero);
         }
         #region SecurityCritical
