@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/DmitryGaravsky/AutoClosingMessageBox</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>The MessageBox which automatically closes after the specific timeout.</releaseNotes>
+    <tags>messagebox autoclose auto-closing</tags>
+  </metadata>
+</package>
