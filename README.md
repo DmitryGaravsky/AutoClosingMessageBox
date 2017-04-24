@@ -1,15 +1,12 @@
 # AutoClosingMessageBox
-
-The MessageBox which automatically closes after specific timeout.
-
+The MessageBox which automatically closes after the specific timeout.
 
 ### Usage:
 
 Use the `AutoClosingMessageBox.Show` method either as follows: 
 
-    // Fire and forget(it about to be closed after 1000ms, default timeout)
+    // Fire and forget - it about to be closed after default timeout(1000ms)
     AutoClosingMessageBox.Show("Hello, World!");
-
 
 or follows:
 
@@ -26,9 +23,3 @@ or follows:
     else { 
         // or not
     }
-
-
-
-
-
-
