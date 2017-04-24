@@ -23,3 +23,8 @@ or follows:
     else { 
         // or not
     }
+
+### NuGet:
+To install [AutoClosingMessageBox](https://www.nuget.org/packages/AutoClosingMessageBox/1.0.0.1), run the following command in the Package Manager Console:
+
+    Install-Package AutoClosingMessageBox
