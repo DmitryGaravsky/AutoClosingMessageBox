@@ -1,6 +1,8 @@
 # AutoClosingMessageBox
 The MessageBox which automatically closes after the specific timeout.
 
+<a href="https://www.nuget.org/packages/AutoClosingMessageBox/"><img alt="Nuget Version" src="https://img.shields.io/nuget/v/AutoClosingMessageBox.svg" data-canonical-src="https://img.shields.io/nuget/v/AutoClosingMessageBox.svg" style="max-width:100%;" /></a>
+
 ### Usage:
 
 Use the `AutoClosingMessageBox.Show` method either as follows: 
