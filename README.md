@@ -2,6 +2,8 @@
 The MessageBox which automatically closes after the specific timeout.
 
 <a href="https://www.nuget.org/packages/AutoClosingMessageBox/"><img alt="Nuget Version" src="https://img.shields.io/nuget/v/AutoClosingMessageBox.svg" data-canonical-src="https://img.shields.io/nuget/v/AutoClosingMessageBox.svg" style="max-width:100%;" /></a>
+<a href="https://stackoverflow.com/a/14522952/1010363"><img alt="StackOverflow Answer" src="https://img.shields.io/badge/StackOverflow-QnA-green.svg"></a>
+
 
 ### Usage:
 
@@ -27,7 +29,7 @@ or follows:
     }
 
 
-You can also use the Factory API to get full control on MessageBox showing:
+You can also use the `AutoClosingMessageBoxFactory` method to get full control on MessageBox showing:
 
     var toBeOrNotToBeQuestion = AutoClosingMessageBox.Factory(
             showMethod: (caption, buttons) =>
@@ -46,6 +48,6 @@ You can also use the Factory API to get full control on MessageBox showing:
 
 
 ### NuGet:
-To install [AutoClosingMessageBox](https://www.nuget.org/packages/AutoClosingMessageBox/1.0.0.1), run the following command in the Package Manager Console:
+To install [AutoClosingMessageBox](https://www.nuget.org/packages/AutoClosingMessageBox/1.0.0.2), run the following command in the Package Manager Console:
 
-    Install-Package AutoClosingMessageBox
+    Install-Package AutoClosingMessageBox -Version 1.0.0.2
