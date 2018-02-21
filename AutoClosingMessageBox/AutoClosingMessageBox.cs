@@ -48,7 +48,7 @@
         public static IAutoClosingMessageBox Factory(
             Func<string, MessageBoxButtons, DialogResult> showMethod, string caption = null) {
             if(showMethod == null)
-                throw new ArgumentNullException(nameof(showMethod));
+                throw new ArgumentNullException("showMethod");
             return new Impl(showMethod, caption);
         }
         #endregion
