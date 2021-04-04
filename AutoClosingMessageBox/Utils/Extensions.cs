@@ -1,38 +1,48 @@
-﻿namespace System.Windows.Forms.Extensions {
+﻿#if WPF
+namespace System.Windows.Controls.Extensions {
+    using BUTTONS = System.Windows.MessageBoxButton;
+    using RESULT = System.Windows.MessageBoxResult;
+#else
+namespace System.Windows.Forms.Extensions {
+    using RESULT = System.Windows.Forms.DialogResult;
+    using BUTTONS = System.Windows.Forms.MessageBoxButtons;
+#endif
     static class MessageBoxButtonsExtension {
-        public static DialogResult ToDialogResult(this MessageBoxButtons buttons, DialogResult defaultResult) {
+        public static RESULT ToDialogResult(this BUTTONS buttons, RESULT defaultResult) {
             switch(buttons) {
-                case MessageBoxButtons.OK:
-                    return DialogResult.OK;
-                case MessageBoxButtons.OKCancel:
-                    if(defaultResult == DialogResult.Cancel)
+                case BUTTONS.OK:
+                    return RESULT.OK;
+                case BUTTONS.OKCancel:
+                    if(defaultResult == RESULT.Cancel)
                         break;
-                    return DialogResult.OK;
-                case MessageBoxButtons.YesNo:
-                    if(defaultResult == DialogResult.No)
+                    return RESULT.OK;
+                case BUTTONS.YesNo:
+                    if(defaultResult == RESULT.No)
                         break;
-                    return DialogResult.Yes;
-                case MessageBoxButtons.YesNoCancel:
-                    if(defaultResult == DialogResult.No)
+                    return RESULT.Yes;
+                case BUTTONS.YesNoCancel:
+                    if(defaultResult == RESULT.No)
                         break;
-                    if(defaultResult == DialogResult.Cancel)
+                    if(defaultResult == RESULT.Cancel)
                         break;
-                    return DialogResult.Yes;
-                case MessageBoxButtons.RetryCancel:
-                    if(defaultResult == DialogResult.Retry)
+                    return RESULT.Yes;
+#if !WPF
+                case BUTTONS.RetryCancel:
+                    if(defaultResult == RESULT.Retry)
                         break;
-                    return DialogResult.Cancel;
-                case MessageBoxButtons.AbortRetryIgnore:
-                    if(defaultResult == DialogResult.Abort)
+                    return RESULT.Cancel;
+                case BUTTONS.AbortRetryIgnore:
+                    if(defaultResult == RESULT.Abort)
                         break;
-                    if(defaultResult == DialogResult.Retry)
+                    if(defaultResult == RESULT.Retry)
                         break;
-                    return DialogResult.Ignore;
+                    return RESULT.Ignore;
+#endif
             }
             return defaultResult;
         }
-        public static int ToDialogButtonId(this DialogResult result, MessageBoxButtons buttons) {
-            if(buttons == MessageBoxButtons.OK)
+        public static int ToDialogButtonId(this RESULT result, BUTTONS buttons) {
+            if(buttons == BUTTONS.OK)
                 return 2; // Exceptional case
             return (int)result;
         }

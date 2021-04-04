@@ -2,7 +2,6 @@
     using System;
     using System.Runtime.InteropServices;
     using System.Security;
-    using System.Windows.Forms;
 
     [SecuritySafeCritical]
     static class Win32Api {
@@ -13,8 +12,7 @@
         public static void SendCommandToDlgButton(IntPtr hWnd, int dlgButtonId) {
             if(hWnd == IntPtr.Zero)
                 return;
-            UnsafeNativeMethods.EnumChildWindows(hWnd, (handle, param) =>
-            {
+            UnsafeNativeMethods.EnumChildWindows(hWnd, (handle, param) => {
                 int ctrlId = UnsafeNativeMethods.GetDlgCtrlID(handle);
                 if(ctrlId == dlgButtonId) {
                     const uint WM_COMMAND = 0x0111;

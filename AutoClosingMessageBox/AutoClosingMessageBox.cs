@@ -1,15 +1,25 @@
-﻿namespace System.Windows.Forms {
-    using System.Threading;
+﻿#if WPF
+namespace System.Windows.Controls {
+    using System.Windows.Controls.Extensions;
+    using BUTTONS = System.Windows.MessageBoxButton;
+    using OWNER = System.Windows.Window;
+    using RESULT = System.Windows.MessageBoxResult;
+#else
+namespace System.Windows.Forms {
     using System.Windows.Forms.Extensions;
+    using BUTTONS = System.Windows.Forms.MessageBoxButtons;
+    using OWNER = System.Windows.Forms.IWin32Window;
+    using RESULT = System.Windows.Forms.DialogResult;
+#endif
 
     public class AutoClosingMessageBox {
         readonly string caption;
-        readonly DialogResult result;
-        AutoClosingMessageBox(string caption, int timeout, Func<string, MessageBoxButtons, DialogResult> showMethod,
-            MessageBoxButtons buttons = MessageBoxButtons.OK, DialogResult defaultResult = DialogResult.None) {
+        readonly RESULT result;
+        AutoClosingMessageBox(string caption, int timeout, Func<string, BUTTONS, RESULT> showMethod,
+            BUTTONS buttons = BUTTONS.OK, RESULT defaultResult = RESULT.None) {
             this.caption = caption ?? string.Empty;
             this.result = buttons.ToDialogResult(defaultResult);
-            using(new Threading.Timer(OnTimerElapsed, result.ToDialogButtonId(buttons), timeout, Timeout.Infinite))
+            using(new System.Threading.Timer(OnTimerElapsed, result.ToDialogButtonId(buttons), timeout, System.Threading.Timeout.Infinite))
                 this.result = showMethod(this.caption, buttons);
         }
         void OnTimerElapsed(object state) {
@@ -20,17 +30,17 @@
             Utils.Win32Api.SendCommandToDlgButton(hWndMsgBox, dlgButtonId);
         }
         #region Show API
-        public static DialogResult Show(string text,
+        public static RESULT Show(string text,
             string caption = null, int timeout = 1000,
-            MessageBoxButtons buttons = MessageBoxButtons.OK, DialogResult defaultResult = DialogResult.None) {
+            BUTTONS buttons = BUTTONS.OK, RESULT defaultResult = RESULT.None) {
             return new AutoClosingMessageBox(caption, timeout,
                             (capt, btns) => MessageBox.Show(text, capt, btns),
                         buttons, defaultResult
                     ).result;
         }
-        public static DialogResult Show(IWin32Window owner, string text,
+        public static RESULT Show(OWNER owner, string text,
             string caption = null, int timeout = 1000,
-            MessageBoxButtons buttons = MessageBoxButtons.OK, DialogResult defaultResult = DialogResult.None) {
+            BUTTONS buttons = BUTTONS.OK, RESULT defaultResult = RESULT.None) {
             return new AutoClosingMessageBox(caption, timeout,
                             (capt, btns) => MessageBox.Show(owner, text, capt, btns),
                         buttons, defaultResult
@@ -39,14 +49,14 @@
         #endregion
         #region Factory
         public interface IAutoClosingMessageBox {
-            DialogResult Show(
+            RESULT Show(
                     int timeout = 1000,
-                    MessageBoxButtons buttons = MessageBoxButtons.OK,
-                    DialogResult defaultResult = DialogResult.None
+                    BUTTONS buttons = BUTTONS.OK,
+                    RESULT defaultResult = RESULT.None
                 );
         }
         public static IAutoClosingMessageBox Factory(
-            Func<string, MessageBoxButtons, DialogResult> showMethod, string caption = null) {
+            Func<string, BUTTONS, RESULT> showMethod, string caption = null) {
             if(showMethod == null)
                 throw new ArgumentNullException("showMethod");
             return new Impl(showMethod, caption);
@@ -54,14 +64,14 @@
         #endregion
         #region IAutoClosingMessageBox
         sealed class Impl : IAutoClosingMessageBox {
-            readonly Func<int, MessageBoxButtons, DialogResult, DialogResult> getResult;
+            readonly Func<int, BUTTONS, RESULT, RESULT> getResult;
             internal Impl(
-                Func<string, MessageBoxButtons, DialogResult> showMethod, string caption) {
+                Func<string, BUTTONS, RESULT> showMethod, string caption) {
                 this.getResult = (timeout, buttons, defaultResult) =>
                     new AutoClosingMessageBox(caption, timeout, showMethod, buttons, defaultResult).result;
             }
-            DialogResult IAutoClosingMessageBox.Show(
-                int timeout, MessageBoxButtons buttons, DialogResult defaultResult) {
+            RESULT IAutoClosingMessageBox.Show(
+                int timeout, BUTTONS buttons, RESULT defaultResult) {
                 return getResult(timeout, buttons, defaultResult);
             }
         }
