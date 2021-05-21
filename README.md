@@ -5,7 +5,7 @@ The MessageBox which automatically closes after the specific timeout.
 <a href="https://stackoverflow.com/a/14522952/1010363"><img alt="StackOverflow Answer" src="https://img.shields.io/badge/StackOverflow-QnA-green.svg"></a>
 
 
-### Usage:
+### Usage
 
 Use the `AutoClosingMessageBox.Show` method either as follows: 
 
@@ -47,7 +47,13 @@ You can also use the `AutoClosingMessageBoxFactory` method to get full control o
     }
 
 
-### NuGet:
+### NuGet
+
 To install [AutoClosingMessageBox](https://www.nuget.org/packages/AutoClosingMessageBox/1.0.0.2), run the following command in the Package Manager Console:
 
     Install-Package AutoClosingMessageBox -Version 1.0.0.2
+
+
+### License
+
+The AutoClosingMessageBox library is licensed under the [MIT](https://github.com/DmitryGaravsky/AutoClosingMessageBox/blob/master/LICENSE.TXT) license.
