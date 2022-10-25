@@ -2,6 +2,7 @@
     using System;
     using System.Runtime.InteropServices;
     using System.Security;
+    using System.Text;
 
     [SecuritySafeCritical]
     static class Win32Api {
@@ -20,6 +21,18 @@
                 }
                 return ctrlId != dlgButtonId;
             }, IntPtr.Zero);
+        }
+        public static string GetDlgButtonText(IntPtr hWnd, int dlgButtonId) {
+            if(hWnd == IntPtr.Zero)
+                return string.Empty;
+            StringBuilder sb = new StringBuilder(128);
+            int count = (int)UnsafeNativeMethods.GetDlgItemText(hWnd, dlgButtonId, sb, sb.Capacity);
+            return sb.ToString(0, count);
+        }
+        public static bool SetDlgButtonText(IntPtr hWnd, int dlgButtonId, string text) {
+            if(hWnd == IntPtr.Zero)
+                return false;
+            return UnsafeNativeMethods.SetDlgItemText(hWnd, dlgButtonId, text);
         }
         #region SecurityCritical
         static class UnsafeNativeMethods {
@@ -42,7 +55,21 @@
             );
             [DllImport("user32.dll")]
             internal static extern int GetDlgCtrlID(
-                [In] IntPtr hWndCtrl
+                [In] IntPtr hDlg
+            );
+            [DllImport("user32.dll", SetLastError = true)]
+            internal static extern uint GetDlgItemText(
+                [In] IntPtr hDlg,
+                [In] int nIDDlgItem,
+                [Out] StringBuilder lpString,
+                [In] int nMaxCount
+            );
+            [DllImport("user32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            internal static extern bool SetDlgItemText(
+                [In] IntPtr hDlg,
+                [In] int nIDDlgItem,
+                [In] string lpString
             );
             [DllImport("user32.dll", SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
