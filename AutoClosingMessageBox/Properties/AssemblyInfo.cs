@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("1.0.0.3")]
+[assembly: AssemblyVersion("1.0.0.5")]
 [assembly: CLSCompliant(true)]
 [assembly: AssemblyTitle("AutoClosingMessageBox")]
 [assembly: AssemblyDescription("MessageBox with auto-closing functionality")]
@@ -14,6 +14,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Microsoft® .NET Framework Extension for Windows Forms")]
 #endif
 [assembly: AssemblyCopyright("Dmitry Garavsky, ©2022")]
-[assembly: AssemblyFileVersion("1.0.0.3")]
+[assembly: AssemblyFileVersion("1.0.0.5")]
 [assembly: StringFreezing]
 [assembly: ComVisible(false)]

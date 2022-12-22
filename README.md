@@ -72,9 +72,9 @@ messageBoxWithQuestionIcon.Show();
 
 ### NuGet
 
-To install [AutoClosingMessageBox](https://www.nuget.org/packages/AutoClosingMessageBox/1.0.0.3), run the following command in the Package Manager Console:
+To install [AutoClosingMessageBox](https://www.nuget.org/packages/AutoClosingMessageBox), run the following command in the Package Manager Console:
 
-    Install-Package AutoClosingMessageBox -Version 1.0.0.3
+    Install-Package AutoClosingMessageBox
 
 
 ### License
