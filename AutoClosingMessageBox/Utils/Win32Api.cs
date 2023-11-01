@@ -27,7 +27,7 @@
                 return string.Empty;
             StringBuilder sb = new StringBuilder(128);
             int count = (int)UnsafeNativeMethods.GetDlgItemText(hWnd, dlgButtonId, sb, sb.Capacity);
-            return sb.ToString(0, count);
+            return sb.ToString(0, Math.Max(0, Math.Min(sb.Length, count)));
         }
         public static bool SetDlgButtonText(IntPtr hWnd, int dlgButtonId, string text) {
             if(hWnd == IntPtr.Zero)
@@ -57,14 +57,14 @@
             internal static extern int GetDlgCtrlID(
                 [In] IntPtr hDlg
             );
-            [DllImport("user32.dll", SetLastError = true)]
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             internal static extern uint GetDlgItemText(
                 [In] IntPtr hDlg,
                 [In] int nIDDlgItem,
                 [Out] StringBuilder lpString,
                 [In] int nMaxCount
             );
-            [DllImport("user32.dll")]
+            [DllImport("user32.dll", CharSet = CharSet.Auto)]
             [return: MarshalAs(UnmanagedType.Bool)]
             internal static extern bool SetDlgItemText(
                 [In] IntPtr hDlg,
@@ -75,7 +75,7 @@
             [return: MarshalAs(UnmanagedType.Bool)]
             internal static extern bool PostMessage(
                 [In] IntPtr hWnd,
-                [In] UInt32 Msg,
+                [In] uint Msg,
                 [In] IntPtr wParam,
                 [In] IntPtr lParam
             );
