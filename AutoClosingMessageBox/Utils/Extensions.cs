@@ -4,8 +4,8 @@ namespace System.Windows.Controls.Extensions {
     using RESULT = System.Windows.MessageBoxResult;
 #else
 namespace System.Windows.Forms.Extensions {
-    using RESULT = System.Windows.Forms.DialogResult;
     using BUTTONS = System.Windows.Forms.MessageBoxButtons;
+    using RESULT = System.Windows.Forms.DialogResult;
 #endif
     static class MessageBoxButtonsExtension {
         public static RESULT ToDialogResult(this BUTTONS buttons, RESULT defaultResult) {
