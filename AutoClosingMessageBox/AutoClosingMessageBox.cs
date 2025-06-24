@@ -87,17 +87,17 @@ namespace System.Windows.Forms {
         #region Show API
         public static RESULT Show(string text,
             string caption = null, int timeout = 1000,
-            BUTTONS buttons = BUTTONS.OK, RESULT defaultResult = RESULT.None, bool showCountDown = false) {
+            BUTTONS buttons = BUTTONS.OK, RESULT defaultResult = RESULT.None, MessageBoxIcon icon = MessageBoxIcon.None, bool showCountDown = false) {
             return new AutoClosingMessageBox(caption, timeout,
-                            (capt, btns) => MessageBox.Show(text, capt, btns),
+                            (capt, btns) => MessageBox.Show(text, capt, btns, icon),
                         buttons, defaultResult, showCountDown
                     ).result;
         }
         public static RESULT Show(OWNER owner, string text,
             string caption = null, int timeout = 1000,
-            BUTTONS buttons = BUTTONS.OK, RESULT defaultResult = RESULT.None, bool showCountDown = false) {
+            BUTTONS buttons = BUTTONS.OK, RESULT defaultResult = RESULT.None, MessageBoxIcon icon = MessageBoxIcon.None, bool showCountDown = false) {
             return new AutoClosingMessageBox(caption, timeout,
-                            (capt, btns) => MessageBox.Show(owner, text, capt, btns),
+                            (capt, btns) => MessageBox.Show(owner, text, capt, btns, icon),
                         buttons, defaultResult, showCountDown
                     ).result;
         }
