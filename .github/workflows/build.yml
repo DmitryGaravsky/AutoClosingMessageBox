@@ -1,0 +1,36 @@
+name: Build & Pack .NET Solution
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET SDKs
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          8.0.x
+
+    - name: Restore NuGet packages
+      run: dotnet restore AutoClosingMessageBox.NET8.Win.sln
+
+    - name: Build solution
+      run: dotnet build AutoClosingMessageBox.NET8.Win.sln --configuration Release --no-restore
+
+    - name: Pack NuGet package
+      run: dotnet pack AutoClosingMessageBox.NET8.Win.sln --configuration Release --no-build --output ./nupkg
+
+    - name: Upload NuGet package artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: nupkg
+        path: ./nupkg/*.nupkg

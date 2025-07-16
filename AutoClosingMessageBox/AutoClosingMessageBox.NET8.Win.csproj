@@ -18,17 +18,17 @@
     <Title>The MessageBox which automatically closes after the specific timeout.</Title>
     <Authors>Dmitry Garavsky</Authors>
     <Description>The MessageBox which automatically closes after the specific timeout.</Description>
-    <Copyright>Dmitry Garavsky, ©2024</Copyright>
+    <Copyright>Dmitry Garavsky, ©2025</Copyright>
     <PackageProjectUrl>https://github.com/DmitryGaravsky/AutoClosingMessageBox</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/DmitryGaravsky/AutoClosingMessageBox</RepositoryUrl>
     <PackageTags>Messagebox;AutoClose;Auto-Closing</PackageTags>
-    <AssemblyVersion>1.0.0.6</AssemblyVersion>
-    <FileVersion>1.0.0.6</FileVersion>
+    <AssemblyVersion>1.0.0.7</AssemblyVersion>
+    <FileVersion>1.0.0.7</FileVersion>
     <PackageLicenseFile>LICENSE.TXT</PackageLicenseFile>
     <PackageOutputPath>..\bin</PackageOutputPath>
-    <Version>1.0.0.6</Version>
-    <PackageReleaseNotes>v1.0.0.6:
+    <Version>1.0.0.7</Version>
+    <PackageReleaseNotes>v1.0.0.7:
 - multitarget nuget package for .NET8(LTS)/.NET Framework 4.7.2 
 - small fix of countdown feature</PackageReleaseNotes>
   </PropertyGroup>
